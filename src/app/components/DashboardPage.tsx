@@ -164,22 +164,22 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
 
   return (
     <div>
-      <h1 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "24px", color: "var(--text-primary)" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "28px", color: "var(--text-primary)" }}>
         Dashboard Siswa
       </h1>
 
       {/* ---- Stat Cards ---- */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", marginBottom: "24px" }} className="stagger-children">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px", marginBottom: "28px" }} className="stagger-children">
         {stats.map((s) => (
           <div key={s.label} className="stat-card">
             <div>
-              <div style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, marginBottom: "4px" }}>
+              <div style={{ fontSize: "14px", color: "var(--text-secondary)", fontWeight: 500, marginBottom: "6px" }}>
                 {s.label}
               </div>
-              <div style={{ fontSize: "32px", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }}>
+              <div style={{ fontSize: "36px", fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.2 }}>
                 {s.value}
               </div>
-              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>{s.sub}</div>
+              <div style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "4px" }}>{s.sub}</div>
             </div>
             <div className="stat-icon" style={{ background: s.bgColor }}>
               {s.icon}
@@ -189,23 +189,23 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
       </div>
 
       {/* ---- Row 1: Bar Chart + Pie Chart ---- */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+      <div className="dashboard-grid-2" style={{ marginBottom: "20px" }}>
         {/* Bar Chart */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <h3 style={{ fontSize: "16px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "8px" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><rect x="3" y="12" width="4" height="9" rx="1" /><rect x="10" y="7" width="4" height="14" rx="1" /><rect x="17" y="3" width="4" height="18" rx="1" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "10px" }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><rect x="3" y="12" width="4" height="9" rx="1" /><rect x="10" y="7" width="4" height="14" rx="1" /><rect x="17" y="3" width="4" height="18" rx="1" /></svg>
               Siswa per Kelas
             </h3>
             <span className="badge badge-blue">Gender Distribution</span>
           </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={barData} barGap={4}>
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={barData} barGap={6}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="name" fontSize={12} tick={{ fill: "#64748b" }} />
-              <YAxis fontSize={12} tick={{ fill: "#64748b" }} allowDecimals={false} />
+              <XAxis dataKey="name" fontSize={13} tick={{ fill: "#64748b" }} />
+              <YAxis fontSize={13} tick={{ fill: "#64748b" }} allowDecimals={false} />
               <Tooltip contentStyle={{ borderRadius: "8px", border: "1px solid #e2e8f0", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }} />
-              <Legend iconType="square" wrapperStyle={{ fontSize: "12px" }} />
+              <Legend iconType="square" wrapperStyle={{ fontSize: "13px" }} />
               <Bar dataKey="Laki-Laki" fill="#1d63ff" radius={[4, 4, 0, 0]} />
               <Bar dataKey="Perempuan" fill="#ec4899" radius={[4, 4, 0, 0]} />
             </BarChart>
@@ -213,22 +213,22 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
         </div>
 
         {/* Pie Chart */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <h3 style={{ fontSize: "16px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "8px" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 2a10 10 0 0 1 0 20" /><line x1="12" y1="2" x2="12" y2="12" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "10px" }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 2a10 10 0 0 1 0 20" /><line x1="12" y1="2" x2="12" y2="12" /></svg>
               Jenis Kelamin
             </h3>
             <span className="badge badge-blue">Total Ratio</span>
           </div>
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={320}>
             <PieChart>
               <Pie
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                innerRadius={65}
-                outerRadius={100}
+                innerRadius={75}
+                outerRadius={115}
                 paddingAngle={4}
                 dataKey="value"
                 label={({ name, percent }) => `${name} (${((percent || 0) * 100).toFixed(1)}%)`}
@@ -239,24 +239,24 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
                 ))}
               </Pie>
               <Tooltip contentStyle={{ borderRadius: "8px", border: "1px solid #e2e8f0" }} />
-              <Legend iconType="square" wrapperStyle={{ fontSize: "12px" }} />
+              <Legend iconType="square" wrapperStyle={{ fontSize: "13px" }} />
             </PieChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* ---- Row 2: Area Chart + Jenis Pelanggaran ---- */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+      <div className="dashboard-grid-2" style={{ marginBottom: "20px" }}>
         {/* Area Chart */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <h3 style={{ fontSize: "16px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "8px" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: "10px" }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
               Tren Pelanggaran Siswa
             </h3>
             <span className="badge badge-orange">6 Bulan Terakhir</span>
           </div>
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={290}>
             <AreaChart data={trenPelanggaran}>
               <defs>
                 <linearGradient id="colorPelanggaran" x1="0" y1="0" x2="0" y2="1">
@@ -269,23 +269,23 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="bulan" fontSize={12} tick={{ fill: "#64748b" }} />
-              <YAxis fontSize={12} tick={{ fill: "#64748b" }} allowDecimals={false} />
+              <XAxis dataKey="bulan" fontSize={13} tick={{ fill: "#64748b" }} />
+              <YAxis fontSize={13} tick={{ fill: "#64748b" }} allowDecimals={false} />
               <Tooltip contentStyle={{ borderRadius: "8px", border: "1px solid #e2e8f0" }} />
-              <Legend iconType="line" wrapperStyle={{ fontSize: "12px" }} />
-              <Area type="monotone" dataKey="pelanggaran" name="Pelanggaran" stroke="#ef4444" strokeWidth={2} fill="url(#colorPelanggaran)" />
-              <Area type="monotone" dataKey="diselesaikan" name="Diselesaikan" stroke="#22c55e" strokeWidth={2} fill="url(#colorDiselesaikan)" />
+              <Legend iconType="line" wrapperStyle={{ fontSize: "13px" }} />
+              <Area type="monotone" dataKey="pelanggaran" name="Pelanggaran" stroke="#ef4444" strokeWidth={2.5} fill="url(#colorPelanggaran)" />
+              <Area type="monotone" dataKey="diselesaikan" name="Diselesaikan" stroke="#22c55e" strokeWidth={2.5} fill="url(#colorDiselesaikan)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
 
         {/* Jenis Pelanggaran List */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 20px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <h3 style={{ fontSize: "18px", fontWeight: 600, margin: "0 0 24px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
             Jenis Pelanggaran
           </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             {topJenis.map(([jenis, count], i) => (
               <div
                 key={jenis}
@@ -293,25 +293,25 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "12px 16px",
+                  padding: "14px 18px",
                   background: "#f8fafc",
-                  borderRadius: "10px",
+                  borderRadius: "12px",
                   transition: "all 0.2s ease",
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "#f0f4ff"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "#f8fafc"; }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                   <span style={{
-                    width: 28, height: 28, borderRadius: "50%",
+                    width: 32, height: 32, borderRadius: "50%",
                     background: i === 0 ? "#fee2e2" : i === 1 ? "#fef3c7" : "#e8efff",
                     color: i === 0 ? "#ef4444" : i === 1 ? "#f59e0b" : "#1d63ff",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "12px", fontWeight: 700,
+                    fontSize: "13px", fontWeight: 700,
                   }}>
                     {i + 1}
                   </span>
-                  <span style={{ fontSize: "14px", fontWeight: 500 }}>{jenis}</span>
+                  <span style={{ fontSize: "15px", fontWeight: 500 }}>{jenis}</span>
                 </div>
                 <span className={`badge ${i === 0 ? "badge-red" : i === 1 ? "badge-orange" : "badge-blue"}`}>
                   {count} kasus
@@ -323,25 +323,25 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
       </div>
 
       {/* ---- Row 3: Tingkat Pelanggaran + Pelanggaran Terbanyak + Birth Year Distribution ---- */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
+      <div className="dashboard-grid-3">
         {/* Tingkat Pelanggaran */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 20px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <h3 style={{ fontSize: "18px", fontWeight: 600, margin: "0 0 24px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d63ff" strokeWidth="2"><path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" /></svg>
             Tingkat Pelanggaran
           </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             {([
               { label: "Ringan", count: tingkatCounts.Ringan, color: "#22c55e", bg: "#dcfce7" },
               { label: "Sedang", count: tingkatCounts.Sedang, color: "#f59e0b", bg: "#fef3c7" },
               { label: "Berat", count: tingkatCounts.Berat, color: "#ef4444", bg: "#fee2e2" },
             ] as const).map((t) => (
-              <div key={t.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", background: "#f8fafc", borderRadius: "10px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: t.color }} />
-                  <span style={{ fontWeight: 500, fontSize: "14px" }}>{t.label}</span>
+              <div key={t.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 18px", background: "#f8fafc", borderRadius: "12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div style={{ width: 12, height: 12, borderRadius: "50%", background: t.color }} />
+                  <span style={{ fontWeight: 500, fontSize: "15px" }}>{t.label}</span>
                 </div>
-                <span style={{ background: t.bg, color: t.color, padding: "4px 12px", borderRadius: "20px", fontSize: "13px", fontWeight: 700 }}>
+                <span style={{ background: t.bg, color: t.color, padding: "5px 14px", borderRadius: "20px", fontSize: "14px", fontWeight: 700 }}>
                   {t.count}
                 </span>
               </div>
@@ -350,31 +350,31 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
         </div>
 
         {/* Pelanggaran Terbanyak per Kelas */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 20px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M8 6L21 6" /><path d="M8 12L21 12" /><path d="M8 18L21 18" /><path d="M3 6h.01" /><path d="M3 12h.01" /><path d="M3 18h.01" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <h3 style={{ fontSize: "18px", fontWeight: 600, margin: "0 0 24px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M8 6L21 6" /><path d="M8 12L21 12" /><path d="M8 18L21 18" /><path d="M3 6h.01" /><path d="M3 12h.01" /><path d="M3 18h.01" /></svg>
             Pelanggaran Terbanyak
           </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {topKelas.length > 0 ? (
               topKelas.map(([kelas, count], i) => (
-                <div key={kelas} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", background: "#f8fafc", borderRadius: "10px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div key={kelas} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 18px", background: "#f8fafc", borderRadius: "12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                     <span style={{
-                      width: 28, height: 28, borderRadius: "50%",
+                      width: 32, height: 32, borderRadius: "50%",
                       background: "#fee2e2", color: "#ef4444",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "12px", fontWeight: 700,
+                      fontSize: "13px", fontWeight: 700,
                     }}>
                       {i + 1}
                     </span>
-                    <span style={{ fontSize: "14px", fontWeight: 500 }}>{kelas}</span>
+                    <span style={{ fontSize: "15px", fontWeight: 500 }}>{kelas}</span>
                   </div>
                   <span className="badge badge-red">{count} kasus</span>
                 </div>
               ))
             ) : (
-              <div style={{ color: "var(--text-muted)", fontSize: "14px", padding: "12px 0", textAlign: "center" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: "15px", padding: "14px 0", textAlign: "center" }}>
                 Belum ada data pelanggaran per kelas
               </div>
             )}
@@ -382,12 +382,12 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
         </div>
 
         {/* Distribusi Tahun Kelahiran */}
-        <div className="card animate-fade-in" style={{ padding: "24px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 20px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+        <div className="card animate-fade-in" style={{ padding: "28px" }}>
+          <h3 style={{ fontSize: "18px", fontWeight: 600, margin: "0 0 24px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
             Distribusi Tahun Kelahiran
           </h3>
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={240}>
             <BarChart data={birthYearData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis dataKey="year" fontSize={12} tick={{ fill: "#64748b" }} />

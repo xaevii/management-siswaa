@@ -720,10 +720,10 @@ export default function PelanggaranPage({
   // RENDER: MAIN LIST & TABLE PAGE
   // ============================================================
   return (
-    <div style={{ padding: "24px", maxWidth: "1280px", margin: "0 auto" }}>
+    <div>
       {/* Header & Export Controls */}
-      <div style={{ marginBottom: "20px" }}>
-        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#0f172a", margin: "0 0 12px 0" }}>
+      <div style={{ marginBottom: "28px" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: 700, color: "var(--text-primary)", margin: "0 0 16px 0" }}>
           Data Pelanggaran
         </h1>
 

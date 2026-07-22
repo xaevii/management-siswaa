@@ -89,13 +89,13 @@ export default function SiswaPage({ siswaList, kelasList, onAdd, onUpdate, onDel
 
   return (
     <div>
-      <h1 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "24px", color: "var(--text-primary)" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "28px", color: "var(--text-primary)" }}>
         Siswa
       </h1>
 
-      <div className="card animate-fade-in" style={{ padding: "24px" }}>
+      <div className="card animate-fade-in" style={{ padding: "28px" }}>
         {/* Top Controls */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "12px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", flexWrap: "wrap", gap: "14px" }}>
           {/* Search */}
           <div style={{ position: "relative", minWidth: "240px" }}>
             <div style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#94a3b8" }}>

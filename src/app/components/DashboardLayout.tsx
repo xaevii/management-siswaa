@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context/AppContext";
 import Sidebar from "@/app/components/Sidebar";
@@ -15,6 +15,7 @@ export default function DashboardLayout({
 }) {
   const { isLoggedIn, setActiveMenu } = useAppContext();
   const router = useRouter();
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     setActiveMenu(activeMenu);
@@ -32,6 +33,7 @@ export default function DashboardLayout({
 
   const handleMenuChange = (menu: string) => {
     setActiveMenu(menu);
+    setIsMobileSidebarOpen(false);
     if (menu === "dashboard") {
       router.push("/dashboard");
     } else {
@@ -40,10 +42,22 @@ export default function DashboardLayout({
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar activeMenu={activeMenu} onMenuChange={handleMenuChange} />
-      <div style={{ flex: 1 }}>
-        <Topbar />
+    <div style={{ display: "flex", minHeight: "100vh", position: "relative" }}>
+      {/* Mobile Backdrop */}
+      {isMobileSidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+      <Sidebar
+        activeMenu={activeMenu}
+        onMenuChange={handleMenuChange}
+        isOpenMobile={isMobileSidebarOpen}
+        onCloseMobile={() => setIsMobileSidebarOpen(false)}
+      />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <Topbar onToggleMobileSidebar={() => setIsMobileSidebarOpen((prev) => !prev)} />
         <main className="main-content">{children}</main>
       </div>
     </div>

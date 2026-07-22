@@ -69,11 +69,11 @@ export default function KelasPage({ kelasList, onAdd, onUpdate, onDelete }: Kela
 
   return (
     <div>
-      <h1 style={{ fontSize: "24px", fontWeight: 700, marginBottom: "24px", color: "var(--text-primary)" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "28px", color: "var(--text-primary)" }}>
         Kelas
       </h1>
 
-      <div className="card animate-fade-in" style={{ padding: "24px" }}>
+      <div className="card animate-fade-in" style={{ padding: "28px" }}>
         {/* Top Controls */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "12px" }}>
           <div style={{ position: "relative", minWidth: "240px" }}>
