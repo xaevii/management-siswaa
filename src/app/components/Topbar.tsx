@@ -10,7 +10,7 @@ export default function Topbar() {
   return (
     <div className="topbar">
       <div style={{ fontWeight: 600, fontSize: "15px", color: "var(--text-primary)" }}>
-        SMK Negeri 2 Malang
+        SMK Negeri 2 Malang | Fakhri Hadinanta
       </div>
       <div
         style={{

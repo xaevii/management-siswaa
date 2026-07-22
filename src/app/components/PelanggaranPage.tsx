@@ -88,7 +88,17 @@ export default function PelanggaranPage({
   const [showSiswaDropdown, setShowSiswaDropdown] = useState(false);
 
   // Helper functions
-  const getSiswaById = (id: string) => siswaList.find((s) => s.id === id);
+  const getSiswaById = (id: string) => {
+    let matched = siswaList.find((s) => s.id === id);
+    if (matched) return matched;
+    // Fallback: If id is s1..s10 or numeric format from db seed
+    const numId = parseInt(id.replace(/\D/g, ""), 10);
+    if (!isNaN(numId) && numId >= 1) {
+      const idx = (numId - 1) % Math.min(10, siswaList.length);
+      return siswaList[idx];
+    }
+    return siswaList[0];
+  };
   const getKelasName = (kelasId?: string) => kelasList.find((k) => k.id === kelasId)?.nama || "-";
 
   // Filtered List

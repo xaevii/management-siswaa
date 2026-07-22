@@ -6,7 +6,7 @@ import { useAppContext } from "@/app/context/AppContext";
 import LoginPage from "@/app/components/LoginPage";
 import RegisterPage from "@/app/components/RegisterPage";
 
-export default function Home() {
+export default function LoginPageRoute() {
   const { isLoggedIn, showRegister, setShowRegister, login } = useAppContext();
   const router = useRouter();
 

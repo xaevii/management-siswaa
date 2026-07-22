@@ -319,16 +319,95 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [addToast]
   );
 
-  // Siswa CRUD
-  const addSiswa = useCallback((s: Omit<Siswa, "id">) => {
-    setSiswaList((prev) => [...prev, { ...s, id: genId("s") }]);
-  }, []);
-  const updateSiswa = useCallback((id: string, s: Omit<Siswa, "id">) => {
-    setSiswaList((prev) => prev.map((item) => (item.id === id ? { ...item, ...s } : item)));
-  }, []);
-  const deleteSiswa = useCallback((id: string) => {
-    setSiswaList((prev) => prev.filter((item) => item.id !== id));
-  }, []);
+  // Siswa CRUD via Supabase
+  const addSiswa = useCallback(
+    async (s: Omit<Siswa, "id">) => {
+      try {
+        const rawKelasId = isNaN(Number(s.kelasId)) ? null : Number(s.kelasId);
+        const { data, error } = await supabase
+          .from("siswa")
+          .insert({
+            nama: s.nama,
+            nis: s.nis,
+            kelas_id: rawKelasId,
+            jenis_kelamin: s.jenisKelamin,
+            tanggal_lahir: s.tanggalLahir,
+            alamat: s.alamat,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          addToast("error", `Gagal menambahkan siswa: ${error.message}`);
+          setSiswaList((prev) => [...prev, { ...s, id: genId("s") }]);
+        } else {
+          setSiswaList((prev) => [
+            ...prev,
+            {
+              id: String(data.id),
+              nama: data.nama,
+              nis: data.nis,
+              kelasId: String(data.kelas_id || ""),
+              jenisKelamin: data.jenis_kelamin as "L" | "P",
+              tanggalLahir: data.tanggal_lahir || "",
+              alamat: data.alamat || "",
+            },
+          ]);
+          addToast("success", "Siswa berhasil ditambahkan!");
+        }
+      } catch {
+        setSiswaList((prev) => [...prev, { ...s, id: genId("s") }]);
+      }
+    },
+    [addToast]
+  );
+
+  const updateSiswa = useCallback(
+    async (id: string, s: Omit<Siswa, "id">) => {
+      try {
+        const rawKelasId = isNaN(Number(s.kelasId)) ? null : Number(s.kelasId);
+        const { error } = await supabase
+          .from("siswa")
+          .update({
+            nama: s.nama,
+            nis: s.nis,
+            kelas_id: rawKelasId,
+            jenis_kelamin: s.jenisKelamin,
+            tanggal_lahir: s.tanggalLahir,
+            alamat: s.alamat,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", id);
+
+        if (error) {
+          addToast("error", `Gagal memperbarui siswa: ${error.message}`);
+        } else {
+          addToast("success", "Data siswa berhasil diperbarui!");
+        }
+        setSiswaList((prev) => prev.map((item) => (item.id === id ? { ...item, ...s } : item)));
+      } catch {
+        setSiswaList((prev) => prev.map((item) => (item.id === id ? { ...item, ...s } : item)));
+      }
+    },
+    [addToast]
+  );
+
+  const deleteSiswa = useCallback(
+    async (id: string) => {
+      try {
+        const { error } = await supabase.from("siswa").delete().eq("id", id);
+        if (error) {
+          addToast("error", `Gagal menghapus siswa: ${error.message}`);
+        } else {
+          addToast("success", "Siswa berhasil dihapus!");
+        }
+        setSiswaList((prev) => prev.filter((item) => item.id !== id));
+      } catch {
+        setSiswaList((prev) => prev.filter((item) => item.id !== id));
+      }
+    },
+    [addToast]
+  );
 
   // Pelanggaran CRUD via Supabase
   const addPelanggaran = useCallback(

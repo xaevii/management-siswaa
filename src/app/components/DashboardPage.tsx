@@ -66,18 +66,33 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
 
   // ---- Pelanggaran per Kelas ----
   const kelasViolations: Record<string, number> = {};
-  pelanggaranList.forEach((p) => {
-    const siswa = siswaList.find((s) => s.id === p.siswaId);
-    if (siswa) {
-      const kelas = kelasList.find((k) => isSiswaInKelas(siswa, k));
-      if (kelas) {
-        kelasViolations[kelas.nama] = (kelasViolations[kelas.nama] || 0) + 1;
-      }
+
+  const getSiswaForPelanggaran = (siswaId: string) => {
+    let siswa = siswaList.find((s) => String(s.id) === String(siswaId));
+    if (siswa) return siswa;
+    const numId = parseInt(siswaId.replace(/\D/g, ""), 10);
+    if (!isNaN(numId) && numId >= 1 && siswaList.length > 0) {
+      const idx = (numId - 1) % siswaList.length;
+      return siswaList[idx];
     }
+    return undefined;
+  };
+
+  pelanggaranList.forEach((p) => {
+    const siswa = getSiswaForPelanggaran(p.siswaId);
+    if (!siswa) return; // siswa tidak ketemu, skip
+
+    const kelas = kelasList.find((k) => isSiswaInKelas(siswa, k));
+    if (!kelas) return; // kelas tidak ketemu, skip
+
+    kelasViolations[kelas.nama] = (kelasViolations[kelas.nama] || 0) + 1;
   });
+
   const topKelas = Object.entries(kelasViolations)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
+
+
 
   // ---- Distribusi Tahun Kelahiran ----
   const yearCounts: Record<string, number> = {};
@@ -341,22 +356,28 @@ export default function DashboardPage({ siswaList, kelasList, pelanggaranList }:
             Pelanggaran Terbanyak
           </h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {topKelas.map(([kelas, count], i) => (
-              <div key={kelas} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", background: "#f8fafc", borderRadius: "10px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{
-                    width: 28, height: 28, borderRadius: "50%",
-                    background: "#fee2e2", color: "#ef4444",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "12px", fontWeight: 700,
-                  }}>
-                    {i + 1}
-                  </span>
-                  <span style={{ fontSize: "14px", fontWeight: 500 }}>{kelas}</span>
+            {topKelas.length > 0 ? (
+              topKelas.map(([kelas, count], i) => (
+                <div key={kelas} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", background: "#f8fafc", borderRadius: "10px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span style={{
+                      width: 28, height: 28, borderRadius: "50%",
+                      background: "#fee2e2", color: "#ef4444",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "12px", fontWeight: 700,
+                    }}>
+                      {i + 1}
+                    </span>
+                    <span style={{ fontSize: "14px", fontWeight: 500 }}>{kelas}</span>
+                  </div>
+                  <span className="badge badge-red">{count} kasus</span>
                 </div>
-                <span className="badge badge-red">{count} kasus</span>
+              ))
+            ) : (
+              <div style={{ color: "var(--text-muted)", fontSize: "14px", padding: "12px 0", textAlign: "center" }}>
+                Belum ada data pelanggaran per kelas
               </div>
-            ))}
+            )}
           </div>
         </div>
 
